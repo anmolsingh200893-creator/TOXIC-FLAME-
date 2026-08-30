@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TOXIC FLAME | Esports</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050505;
+    color:white;
+    font-family:Arial,sans-serif;
+    overflow-x:hidden;
+}
+
+/* BACKGROUND */
+
+body::before{
+    content:"";
+    position:fixed;
+    width:350px;
+    height:350px;
+    background:#9cff00;
+    filter:blur(160px);
+    opacity:.10;
+    top:-100px;
+    left:-100px;
+    z-index:-2;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    width:350px;
+    height:350px;
+    background:#ff4200;
+    filter:blur(160px);
+    opacity:.12;
+    right:-100px;
+    bottom:-100px;
+    z-index:-2;
+}
+
+/* NAVBAR */
+
+nav{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:65px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 20px;
+    background:rgba(5,5,5,.88);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid #252525;
+    z-index:100;
+}
+
+.nav-logo{
+    color:#9cff00;
+    font-size:19px;
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+.nav-text{
+    color:#777;
+    font-size:9px;
+    letter-spacing:2px;
+}
+
+/* HERO */
+
+.hero{
+    min-height:100vh;
+    padding:100px 20px 60px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+
+.team-logo{
+    width:155px;
+    height:155px;
+    object-fit:contain;
+    border-radius:50%;
+    padding:8px;
+    border:2px solid #9cff00;
+    box-shadow:
+        0 0 15px #9cff00,
+        0 0 45px rgba(156,255,0,.25);
+    animation:logoPulse 2.5s infinite;
+    background:#0b0b0b;
+}
+
+/* If logo doesn't load */
+
+.logo-fallback{
+    display:none;
+    width:155px;
+    height:155px;
+    border-radius:50%;
+    align-items:center;
+    justify-content:center;
+    border:2px solid #9cff00;
+    color:#9cff00;
+    font-size:45px;
+    font-weight:900;
+}
+
+.hero h1{
+    margin-top:32px;
+    font-size:40px;
+    font-weight:900;
+    letter-spacing:4px;
+}
+
+.hero h1 span{
+    color:#9cff00;
+    text-shadow:0 0 20px #9cff00;
+}
+
+.hero-sub{
+    margin-top:12px;
+    color:#999;
+    font-size:11px;
+    letter-spacing:4px;
+}
+
+.status{
+    margin-top:22px;
+    padding:10px 20px;
+    border:1px solid #ff4b00;
+    border-radius:30px;
+    color:#ff7040;
+    font-size:10px;
+    letter-spacing:2px;
+}
+
+/* BUTTON */
+
+.btn{
+    margin-top:28px;
+    padding:13px 27px;
+    border:1px solid #9cff00;
+    border-radius:5px;
+    color:#9cff00;
+    text-decoration:none;
+    font-size:11px;
+    font-weight:bold;
+    letter-spacing:2px;
+    transition:.3s;
+}
+
+.btn:hover{
+    background:#9cff00;
+    color:#050505;
+    box-shadow:0 0 25px #9cff00;
+}
+
+/* SECTIONS */
+
+section{
+    width:100%;
+    max-width:1000px;
+    margin:auto;
+    padding:80px 18px;
+}
+
+.heading{
+    text-align:center;
+    margin-bottom:35px;
+    font-size:27px;
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+.heading span{
+    color:#9cff00;
+}
+
+/* ROSTER */
+
+.roster{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.player{
+    position:relative;
+    overflow:hidden;
+    background:#0c0d0c;
+    border:1px solid #252925;
+    border-radius:15px;
+    padding:15px;
+    text-align:center;
+    transition:.35s;
+}
+
+.player:hover{
+    transform:translateY(-7px);
+    border-color:#9cff00;
+    box-shadow:0 0 30px rgba(156,255,0,.15);
+}
+
+.player-photo{
+    width:100%;
+    height:170px;
+    object-fit:cover;
+    object-position:center;
+    border-radius:10px;
+    border:1px solid #303530;
+}
+
+.player h3{
+    margin-top:15px;
+    font-size:14px;
+    letter-spacing:1px;
+}
+
+.role{
+    margin-top:8px;
+    color:#ff6935;
+    font-size:9px;
+    letter-spacing:2px;
+}
+
+/* ABOUT */
+
+.about{
+    text-align:center;
+    padding:30px 20px;
+    background:#0b0c0b;
+    border:1px solid #242824;
+    border-radius:18px;
+}
+
+.about-logo{
+    width:75px;
+    height:75px;
+    object-fit:contain;
+    margin-bottom:18px;
+}
+
+.about h2{
+    color:#9cff00;
+    font-size:24px;
+}
+
+.about p{
+    margin-top:14px;
+    color:#999;
+    font-size:13px;
+    line-height:1.8;
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:10px;
+}
+
+.stat{
+    text-align:center;
+    padding:22px 8px;
+    background:#0d0e0d;
+    border:1px solid #252925;
+    border-radius:12px;
+}
+
+.stat strong{
+    display:block;
+    color:#9cff00;
+    font-size:22px;
+}
+
+.stat small{
+    color:#777;
+    font-size:8px;
+    letter-spacing:1px;
+}
+
+/* FOOTER */
+
+footer{
+    padding:45px 15px;
+    text-align:center;
+    border-top:1px solid #222;
+    color:#666;
+    font-size:10px;
+    line-height:2;
+}
+
+footer b{
+    color:#9cff00;
+}
+
+/* PARTICLES */
+
+.particle{
+    position:fixed;
+    bottom:-20px;
+    width:3px;
+    height:3px;
+    border-radius:50%;
+    background:#9cff00;
+    box-shadow:0 0 8px #9cff00;
+    pointer-events:none;
+    animation:rise linear infinite;
+    z-index:-1;
+}
+
+/* ANIMATION */
+
+@keyframes logoPulse{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.06);
+    }
+}
+
+@keyframes rise{
+
+    0%{
+        transform:translateY(0);
+        opacity:0;
+    }
+
+    20%{
+        opacity:.7;
+    }
+
+    100%{
+        transform:translateY(-110vh);
+        opacity:0;
+    }
+}
+
+/* DESKTOP */
+
+@media(min-width:700px){
+
+    .hero h1{
+        font-size:65px;
+    }
+
+    .roster{
+        grid-template-columns:repeat(4,1fr);
+    }
+
+    .player-photo{
+        height:220px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <div class="nav-logo">
+        TF.
+    </div>
+
+    <div class="nav-text">
+        FREE FIRE ESPORTS
+    </div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<div class="hero">
+
+    <img
+        src="logo.png"
+        class="team-logo"
+        alt="TOXIC FLAME Logo"
+        onerror="this.style.display='none';document.querySelector('.logo-fallback').style.display='flex';"
+    >
+
+    <div class="logo-fallback">
+        TF
+    </div>
+
+    <h1>
+        TOXIC <span>FLAME</span>
+    </h1>
+
+    <div class="hero-sub">
+        FREE FIRE ESPORTS
+    </div>
+
+    <div class="status">
+        NEW ORGANIZATION
+    </div>
+
+    <a href="#roster" class="btn">
+        VIEW ROSTER
+    </a>
+
+</div>
+
+
+<!-- ROSTER -->
+
+<section id="roster">
+
+    <div class="heading">
+        TEAM <span>ROSTER</span>
+    </div>
+
+    <div class="roster">
+
+
+        <!-- EREN -->
+
+        <div class="player">
+
+            <img
+                src="eren.png"
+                class="player-photo"
+                alt="TF.EREN1"
+            >
+
+            <h3>
+                TF.EREN1
+            </h3>
+
+            <div class="role">
+                IGL • LEADER
+            </div>
+
+        </div>
+
+
+        <!-- RISHI -->
+
+        <div class="player">
+
+            <img
+                src="rishi.png"
+                class="player-photo"
+                alt="TF.RISHI7"
+            >
+
+            <h3>
+                TF.RISHI7
+            </h3>
+
+            <div class="role">
+                RUSHER
+            </div>
+
+        </div>
+
+
+        <!-- OM -->
+
+        <div class="player">
+
+            <img
+                src="om.png"
+                class="player-photo"
+                alt="TF.OM"
+            >
+
+            <h3>
+                TF.OM
+            </h3>
+
+            <div class="role">
+                SUPPORT
+            </div>
+
+        </div>
+
+
+        <!-- ANUJ -->
+
+        <div class="player">
+
+            <img
+                src="anuj.png"
+                class="player-photo"
+                alt="TF.AGS"
+            >
+
+            <h3>
+                TF.AGS
+            </h3>
+
+            <div class="role">
+                SNIPER • ANUJ
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- TEAM STATS -->
+
+<section>
+
+    <div class="heading">
+        TOXIC <span>FLAME</span>
+    </div>
+
+    <div class="stats">
+
+        <div class="stat">
+            <strong>04</strong>
+            <small>PLAYERS</small>
+        </div>
+
+        <div class="stat">
+            <strong>01</strong>
+            <small>ORG</small>
+        </div>
+
+        <div class="stat">
+            <strong>2026</strong>
+            <small>EST.</small>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section>
+
+    <div class="heading">
+        ABOUT <span>TF</span>
+    </div>
+
+    <div class="about">
+
+        <img
+            src="logo.png"
+            class="about-logo"
+            alt="TF Logo"
+        >
+
+        <h2>
+            TOXIC FLAME
+        </h2>
+
+        <p>
+            A new generation Free Fire esports organization.
+            Built by players who want to compete,
+            improve and create their own legacy.
+            The journey starts here.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <b>TOXIC FLAME</b>
+
+    <br>
+
+    FREE FIRE ESPORTS • NEW ORG
+
+    <br>
+
+    © 2026 TOXIC FLAME
+
+</footer>
+
+
+<script>
+
+/* FLOATING PARTICLES */
+
+for(let i = 0; i < 35; i++){
+
+    const p = document.createElement("div");
+
+    p.className = "particle";
+
+    p.style.left =
+        Math.random() * 100 + "%";
+
+    p.style.animationDuration =
+        (5 + Math.random() * 7) + "s";
+
+    p.style.animationDelay =
+        Math.random() * 7 + "s";
+
+    document.body.appendChild(p);
+}
+
+</script>
+
+</body>
+  </html>
